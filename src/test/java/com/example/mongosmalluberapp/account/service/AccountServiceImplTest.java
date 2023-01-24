@@ -1,9 +1,10 @@
 package com.example.mongosmalluberapp.account.service;
 
-import com.example.mongosmalluberapp.account.dto.request.AccountRequest;
+import com.example.mongosmalluberapp.account.accountrExeption.LoginExeption;
+import com.example.mongosmalluberapp.account.dto.request.CreateAccountRequest;
+import com.example.mongosmalluberapp.account.dto.request.LoginRequest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,125 +14,146 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AccountServiceImplTest {
     @Autowired
-AccountSerivice accountSerivice;
-    AccountRequest accountRequest1;
-    AccountRequest accountRequest2;
-    AccountRequest accountRequest3;
-    AccountRequest accountRequest4;
+    UberAccountSerivice uberAccountSerivice;
+    CreateAccountRequest createAccountRequest1;
+    CreateAccountRequest createAccountRequest2;
+    CreateAccountRequest createAccountRequest3;
+    CreateAccountRequest createAccountRequest4;
+    LoginRequest loginRequest1;
     @BeforeEach
     void setUp() {
-        accountRequest1 = new AccountRequest();
-        accountRequest1.setIdentifier("goat");
-        accountRequest1.setPassword("goat");
-        accountRequest1.setContactNumber("09099332737");
-        accountRequest1.setFirstName("samuel");
-        accountRequest1.setLastName("shola");
-        accountRequest1.setUserEmail("samuelShola.gmail.com");
+        loginRequest1 = new  LoginRequest();
+        loginRequest1.setFirstName("samuel");
+        loginRequest1.setIdentifier("goat");
+        loginRequest1.setPassword("goat");
+        //<<===================================================================================>>>
+        createAccountRequest1 = new CreateAccountRequest();
+        createAccountRequest1.setIdentifier("goat");
+        createAccountRequest1.setPassword("goat");
+        createAccountRequest1.setContactNumber("09099332737");
+        createAccountRequest1.setFirstName("samuel");
+        createAccountRequest1.setLastName("shola");
+        createAccountRequest1.setUserEmail("samuelShola.gmail.com");
 
-
-        accountRequest2 = new AccountRequest();
-        accountRequest2.setIdentifier("horse");
-        accountRequest2.setPassword("boneshaker");
-        accountRequest2.setContactNumber("08142345678");
-        accountRequest2.setFirstName("samuel");
-        accountRequest2.setLastName("segun");
-        accountRequest2.setUserEmail("samuelsegun.gmail.com");
-
-        accountRequest3 = new AccountRequest();
-        accountRequest3.setIdentifier("ship");
-        accountRequest3.setPassword("ship");
-        accountRequest3.setContactNumber("09099667787");
-        accountRequest3.setFirstName("ayo");
-        accountRequest3.setLastName("mide");
-        accountRequest3.setUserEmail("ayomide.gmail.com");
-
-        accountRequest4 = new AccountRequest();
-        accountRequest4.setIdentifier("cow");
-        accountRequest4.setPassword("cow");
-        accountRequest4.setContactNumber("08156673432");
-        accountRequest4.setFirstName("pelumi");
-        accountRequest4.setLastName("juno");
-        accountRequest4.setUserEmail("pelumi.gmail.com");
+        //<<===================================================================================>>>
+        createAccountRequest2 = new CreateAccountRequest();
+        createAccountRequest2.setIdentifier("horse");
+        createAccountRequest2.setPassword("boneshaker");
+        createAccountRequest2.setContactNumber("08142345678");
+        createAccountRequest2.setFirstName("samuel");
+        createAccountRequest2.setLastName("segun");
+        createAccountRequest2.setUserEmail("samuelsegun.gmail.com");
+        //<<===================================================================================>>>
+        createAccountRequest3 = new CreateAccountRequest();
+        createAccountRequest3.setIdentifier("ship");
+        createAccountRequest3.setPassword("ship");
+        createAccountRequest3.setContactNumber("09099667787");
+        createAccountRequest3.setFirstName("ayo");
+        createAccountRequest3.setLastName("mide");
+        createAccountRequest3.setUserEmail("ayomide.gmail.com");
+        //<<===================================================================================>>>
+        createAccountRequest4 = new CreateAccountRequest();
+        createAccountRequest4.setIdentifier("cow");
+        createAccountRequest4.setPassword("cow");
+        createAccountRequest4.setContactNumber("08156673432");
+        createAccountRequest4.setFirstName("pelumi");
+        createAccountRequest4.setLastName("juno");
+        createAccountRequest4.setUserEmail("pelumi.gmail.com");
+        //<<===================================================================================>>>
     }
 
     @AfterEach
     @Test
     void tearDown() {
-        accountSerivice.deleteAllUberAccount();
+        uberAccountSerivice.deleteAllUberAccount();
 
     }
     @Test
     void testThatWeCanCreateAccount(){
-        accountSerivice.createUberAccount(accountRequest1);
-        assertEquals(1, accountSerivice.countAccount());
+        uberAccountSerivice.createUberAccount(createAccountRequest1);
+        assertEquals(1, uberAccountSerivice.countExistingAccount());
     }
     @Test
     void testThatWeCanDeleteUberAccountByIdentifier(){
 
-        accountSerivice.createUberAccount(accountRequest1);
-        accountSerivice.createUberAccount(accountRequest2);
-        accountSerivice.createUberAccount(accountRequest3);
-        accountSerivice.createUberAccount(accountRequest4);
-        assertEquals(4, accountSerivice.countAccount());
-     accountSerivice.deleteByIdentifier("horse");
-        assertEquals(3, accountSerivice.countAccount());
+        uberAccountSerivice.createUberAccount(createAccountRequest1);
+        uberAccountSerivice.createUberAccount(createAccountRequest2);
+        uberAccountSerivice.createUberAccount(createAccountRequest3);
+        uberAccountSerivice.createUberAccount(createAccountRequest4);
+        assertEquals(4, uberAccountSerivice.countExistingAccount());
+     uberAccountSerivice.deleteByIdentifier("horse");
+        assertEquals(3, uberAccountSerivice.countExistingAccount());
 
     }
 
     @Test
     void  testThatWeCandeleteAllAccount(){
-        accountSerivice.deleteAllUberAccount();
-        assertEquals(0, accountSerivice.countAccount());
+        uberAccountSerivice.deleteAllUberAccount();
+        assertEquals(0, uberAccountSerivice.countExistingAccount());
     }
     @Test
     void testThatWeCanFindByIdentifier(){
-        accountSerivice.createUberAccount(accountRequest1);
-        accountSerivice.createUberAccount(accountRequest2);
-        accountSerivice.createUberAccount(accountRequest3);
-        accountSerivice.createUberAccount(accountRequest4);
-        assertEquals(4, accountSerivice.countAccount());
-assertEquals("samuel",accountSerivice.findByIdentifier("horse").getFirstName());
+        uberAccountSerivice.createUberAccount(createAccountRequest1);
+        uberAccountSerivice.createUberAccount(createAccountRequest2);
+        uberAccountSerivice.createUberAccount(createAccountRequest3);
+        uberAccountSerivice.createUberAccount(createAccountRequest4);
+        assertEquals(4, uberAccountSerivice.countExistingAccount());
+assertEquals("samuel", uberAccountSerivice.findByIdentifier("horse").getFirstName());
     }
 
     @Test
     void testThatWeCanChangeFirstName(){
-        accountSerivice.createUberAccount(accountRequest1);
-        accountSerivice.createUberAccount(accountRequest2);
-        accountSerivice.createUberAccount(accountRequest3);
-        accountSerivice.createUberAccount(accountRequest4);
+        uberAccountSerivice.createUberAccount(createAccountRequest1);
+        uberAccountSerivice.createUberAccount(createAccountRequest2);
+        uberAccountSerivice.createUberAccount(createAccountRequest3);
+        uberAccountSerivice.createUberAccount(createAccountRequest4);
 
-        accountSerivice.changeFirstName("horse","sonOfGod");
+        uberAccountSerivice.changeFirstName("horse","sonOfGod");
         
-assertEquals("sonOfGod", accountSerivice.findByIdentifier("horse").getFirstName());
+assertEquals("sonOfGod", uberAccountSerivice.findByIdentifier("horse").getFirstName());
     } @Test
     void testThatWeCanChangeLastName(){
-        accountSerivice.createUberAccount(accountRequest1);
-        accountSerivice.createUberAccount(accountRequest2);
-        accountSerivice.createUberAccount(accountRequest3);
-        accountSerivice.createUberAccount(accountRequest4);
+        uberAccountSerivice.createUberAccount(createAccountRequest1);
+        uberAccountSerivice.createUberAccount(createAccountRequest2);
+        uberAccountSerivice.createUberAccount(createAccountRequest3);
+        uberAccountSerivice.createUberAccount(createAccountRequest4);
 
-        accountSerivice.changeLastName("horse","sonOfGrace");
+        uberAccountSerivice.changeLastName("horse","sonOfGrace");
 
-assertEquals("sonOfGrace", accountSerivice.findByIdentifier("horse").getLastName());
+assertEquals("sonOfGrace", uberAccountSerivice.findByIdentifier("horse").getLastName());
     }
     @Test
     void testThatWeCanChangePassword(){
-        accountSerivice.createUberAccount(accountRequest1);
-        accountSerivice.createUberAccount(accountRequest2);
-        accountSerivice.createUberAccount(accountRequest3);
-        accountSerivice.createUberAccount(accountRequest4);
-        accountSerivice.changePassword("ship","aneeka");
-        assertEquals("aneeka",accountSerivice.findByIdentifier("ship").getPassword());
+        uberAccountSerivice.createUberAccount(createAccountRequest1);
+        uberAccountSerivice.createUberAccount(createAccountRequest2);
+        uberAccountSerivice.createUberAccount(createAccountRequest3);
+        uberAccountSerivice.createUberAccount(createAccountRequest4);
+        uberAccountSerivice.changePassword("ship","aneeka");
+        assertEquals("aneeka", uberAccountSerivice.findByIdentifier("ship").getPassword());
     }
     @Test
     void testThatWeCanChangerPhoneNumber(){
-        accountSerivice.createUberAccount(accountRequest1);
-        accountSerivice.createUberAccount(accountRequest2);
-        accountSerivice.createUberAccount(accountRequest3);
-        accountSerivice.createUberAccount(accountRequest4);
-assertEquals(4,accountSerivice.countAccount());
+        uberAccountSerivice.createUberAccount(createAccountRequest1);
+        uberAccountSerivice.createUberAccount(createAccountRequest2);
+        uberAccountSerivice.createUberAccount(createAccountRequest3);
+        uberAccountSerivice.createUberAccount(createAccountRequest4);
+assertEquals(4, uberAccountSerivice.countExistingAccount());
+uberAccountSerivice.changeContactNumber("ship","09099332737");
+    }
 
-accountSerivice.changeContactNumber("ship","09099332737");
+    @Test
+    void testThatAccountCanLogging() throws LoginExeption {
+
+        uberAccountSerivice.createUberAccount(createAccountRequest1);
+        uberAccountSerivice.createUberAccount(createAccountRequest2);
+        uberAccountSerivice.createUberAccount(createAccountRequest3);
+        uberAccountSerivice.createUberAccount(createAccountRequest4);
+        assertEquals(4, uberAccountSerivice.countExistingAccount());
+
+        uberAccountSerivice.loginToUberAccount(loginRequest1);
+        uberAccountSerivice.loginToUberAccount(loginRequest1);
+        assertEquals(2, uberAccountSerivice.countLoggedInAccount());
+
 
     }
 }

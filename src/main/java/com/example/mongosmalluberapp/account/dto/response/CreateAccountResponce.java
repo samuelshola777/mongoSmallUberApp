@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountResponce {
+public class CreateAccountResponce {
     private String message;
 
 }
