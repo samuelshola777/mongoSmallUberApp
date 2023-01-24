@@ -7,6 +7,8 @@ import com.example.mongosmalluberapp.account.dto.request.LoginRequest;
 import com.example.mongosmalluberapp.account.dto.response.CreateAccountResponce;
 import com.example.mongosmalluberapp.account.dto.response.LoginResponse;
 
+import java.util.List;
+
 public interface UberAccountSerivice {
     CreateAccountResponce createUberAccount(CreateAccountRequest createAccountRequest);
 
@@ -30,5 +32,7 @@ public interface UberAccountSerivice {
 
     LoginResponse loginToUberAccount(LoginRequest loginRequest1) throws LoginExeption;
    int countLoggedInAccount();
+    public List<UberAccount> viewAllUberAccount();
+    public boolean getIfOnline();
 
 }

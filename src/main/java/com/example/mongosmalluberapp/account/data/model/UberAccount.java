@@ -29,6 +29,5 @@ public class UberAccount {
 @Id
 private String userId;
 private LocalDateTime registrationDate = LocalDateTime.now();
-private boolean isOnline = false;
 
 }

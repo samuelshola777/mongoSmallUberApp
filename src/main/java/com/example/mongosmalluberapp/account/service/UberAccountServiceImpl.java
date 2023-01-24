@@ -17,7 +17,7 @@ public class UberAccountServiceImpl implements UberAccountSerivice {
     @Autowired
     AccountRepository accountRepository;
 
-
+    static boolean isOnline = false;
     static int loggedInAccount;
 
     @Override
@@ -99,6 +99,7 @@ public class UberAccountServiceImpl implements UberAccountSerivice {
  UberAccount verifiedAccount =  loginValidation(loginRequest1, account);
  if (verifiedAccount != null ){
      loggedInAccount++;
+      isOnline = true;
  }
         return new LoginResponse("login not successful");
     }
@@ -117,6 +118,9 @@ public class UberAccountServiceImpl implements UberAccountSerivice {
         return account;
     }
 
+    public boolean getIfOnline(){
+        return isOnline;
+    }
     public List <UberAccount> viewAllUberAccount(){
         return accountRepository.findAll();
     }
