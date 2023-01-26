@@ -112,7 +112,7 @@ public class UberAccountServiceImpl implements UberAccountSerivice {
         if (! account.getPassword().equals(loginRequest1.getPassword())){
             throw new LoginExeption("Incorrect Password".toUpperCase());
         }
-        if (! account.getFirstName().equals(loginRequest1.getFirstName())){
+        if (! account.getUserEmail().equals(loginRequest1.getEmail())){
             throw new LoginExeption("the name entered does not match the account firstName".toUpperCase());
         }
         return account;

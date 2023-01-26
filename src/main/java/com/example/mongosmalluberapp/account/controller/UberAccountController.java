@@ -8,6 +8,8 @@ import com.example.mongosmalluberapp.account.dto.response.CreateAccountResponce;
 import com.example.mongosmalluberapp.account.dto.response.LoginResponse;
 import com.example.mongosmalluberapp.account.service.UberAccountSerivice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,10 +19,12 @@ public class UberAccountController {
     @Autowired
     UberAccountSerivice uberAccountSerivice;
 @PostMapping("/createAccount")
-    public CreateAccountResponce createUberAccount(CreateAccountRequest createAccountRequest){
-        uberAccountSerivice.createUberAccount(createAccountRequest);
-        return new CreateAccountResponce("Account created successfully");
+    public ResponseEntity<?> createUberAccount(CreateAccountRequest createAccountRequest){
+     CreateAccountResponce createAccountResponse =   uberAccountSerivice.createUberAccount(createAccountRequest);
+        return new ResponseEntity<>(createAccountResponse, HttpStatus.CREATED);
+
     }
+
 @GetMapping("/countAccount")
     public long countExistingAccount(){
         return uberAccountSerivice.countExistingAccount();

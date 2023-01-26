@@ -23,9 +23,10 @@ class AccountServiceImplTest {
     @BeforeEach
     void setUp() {
         loginRequest1 = new  LoginRequest();
-        loginRequest1.setFirstName("samuel");
+        loginRequest1.setEmail("samuelShola.gmail.com");
         loginRequest1.setIdentifier("goat");
         loginRequest1.setPassword("goat");
+
         //<<===================================================================================>>>
         createAccountRequest1 = new CreateAccountRequest();
         createAccountRequest1.setIdentifier("goat");
@@ -62,12 +63,12 @@ class AccountServiceImplTest {
         //<<===================================================================================>>>
     }
 
-    @AfterEach
-    @Test
-    void tearDown() {
-        uberAccountSerivice.deleteAllUberAccount();
-
-    }
+//    @AfterEach
+//    @Test
+//    void tearDown() {
+//        uberAccountSerivice.deleteAllUberAccount();
+//
+//    }
     @Test
     void testThatWeCanCreateAccount(){
         uberAccountSerivice.createUberAccount(createAccountRequest1);

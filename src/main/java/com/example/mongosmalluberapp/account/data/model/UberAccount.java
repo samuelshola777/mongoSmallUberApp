@@ -1,16 +1,14 @@
 package com.example.mongosmalluberapp.account.data.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
-
+@Builder
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Document
 @RequiredArgsConstructor
 public class UberAccount {
@@ -25,7 +23,6 @@ public class UberAccount {
     private String identifier;
     @NonNull
     private String password;
-
 @Id
 private String userId;
 private LocalDateTime registrationDate = LocalDateTime.now();
