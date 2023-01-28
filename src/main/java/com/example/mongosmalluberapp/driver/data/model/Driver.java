@@ -22,6 +22,7 @@ private String driverLocation;
 private long earning;
 private boolean rideStatus;
 private int totalRide;
+private DriverDecision driverDecision;
 private String rideDetails;
 private String id;
 
