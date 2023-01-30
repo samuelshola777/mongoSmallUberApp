@@ -36,7 +36,7 @@ public class Ride {
     private Driver driver;
     @NonNull
     private RideType rideType;
-    private static RideUpdate rideUpdate;
+    private  RideUpdate rideUpdate;
     private long rideAmount;
     @Id
     private String id;

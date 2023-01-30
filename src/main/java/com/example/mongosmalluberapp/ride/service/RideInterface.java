@@ -12,4 +12,6 @@ public interface RideInterface {
     RideResponce orderRide(RideRequest rideRequest);
 
     int countRideOrder();
+
+    RideResponce deleteAllRide();
 }
